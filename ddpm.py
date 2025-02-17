@@ -88,7 +88,9 @@ class DDPMSampler:
         beta_prod_t_prev = 1 - alpha_prod_t_prev
 
         current_alpha_t = alpha_prod_t / alpha_prod_t_prev
-        current_beta_t = beta_prod_t / beta_prod_t_prev
+        current_beta_t = 1 - current_alpha_t #beta_prod_t / beta_prod_t_prev
+        #print(f'1st current_beta_t = {current_beta_t}')
+        #print(f'2nd current_beta_t = {beta_prod_t / beta_prod_t_prev}')
         
         # Compute the predicted original smaple [eq. 15 from DDPM]
         pred_original_sample = (latents - beta_prod_t ** 0.5 * model_output) / alpha_prod_t ** 0.5

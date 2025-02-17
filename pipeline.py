@@ -61,8 +61,8 @@ def generate(prompt: str, uncond_prompt: str, input_image=None,
         if sampler_name == 'ddpm':
             sampler = DDPMSampler(generator)
             sampler.set_inference_timesteps(n_inference_steps)
-            print('the time steps should be', n_inference_steps)
-            print('they are', sampler.timesteps)
+            #print('the time steps should be', n_inference_steps)
+            #print('they are', sampler.timesteps)
         else:
             raise ValueError('only ddpm sampler allowed for now')
         
@@ -135,7 +135,7 @@ def generate(prompt: str, uncond_prompt: str, input_image=None,
         image = image.permute(0, 2, 3, 1)
         image = image.to('cpu', torch.uint8).numpy()
 
-        return image
+        return image[0]
 
 
 def rescale(x, old_range, new_range, clamp=False):
